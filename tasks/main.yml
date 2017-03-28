@@ -1,0 +1,7 @@
+---
+- include: packages.yml
+- include: timezone.yml
+- include: ssh.yml
+- include: logintimeout.yml
+- include: bash_profile.yml
+- include: sethostname.yml

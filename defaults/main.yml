@@ -1,0 +1,33 @@
+---
+ansible_centos_base__hostname: localhost
+
+ansible_centos_base__username: ansible
+ansible_centos_base__timezone: 'America/Sao_Paulo'
+ansible_centos_base__text_editor: vim
+
+ansible_centos_base__sysadmin_tools:
+  - wget
+  - git
+  - rsync
+  - sudo
+  - telnet
+  - traceroute
+  - vim-enhanced
+  - which
+  - yum-plugin-keys
+  - bind-utils
+  - mlocate
+  - zip
+  - unzip
+  - xz
+  - curl
+  - sysstat
+  - fping
+  - setroubleshoot-server
+  - lsof
+  - source-highlight
+  - screen
+  - tmux
+  - htop
+  - iftop
+  - python-firewall 

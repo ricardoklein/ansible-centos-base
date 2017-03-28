@@ -1,0 +1,14 @@
+---
+- name: Set the default text editor for {{ ansible_user }} to {{ ansible_centos_base__text_editor }}
+  # Some VPS providers ship Centos 7 with Nano as default, some with Vim
+  lineinfile:
+    dest: "/home/{{ ansible_user }}/.bash_profile"
+    regexp: "^export EDITOR="
+    line: "export EDITOR={{ ansible_centos_base__text_editor }}"
+
+- name: Set the default text editor for root to {{ ansible_centos_base__text_editor }}
+  lineinfile:
+    dest: "/root/.bash_profile"
+    regexp: "^export EDITOR="
+    line: "export EDITOR={{ ansible_centos_base__text_editor }}"
+

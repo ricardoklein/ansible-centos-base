@@ -1,0 +1,7 @@
+- name: Copy os-security.yml to apply security settings
+  copy:
+    src:  profile.d--os-security.sh
+    dest: /etc/profile.d/os-security.sh
+    owner: root
+    group: root
+    mode: 0644

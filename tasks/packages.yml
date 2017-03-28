@@ -1,0 +1,20 @@
+---
+- name: Ensure deltarpm installed (before updating CentOS packages)
+  yum: name=deltarpm state=latest
+
+- name: Ensure EPEL installed
+  yum: name=epel-release state=latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Ensure EPEL installed (Oracle Linux)
+  yum: 
+    name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+    state=present
+  when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == '6'
+
+
+- name: Ensure basic sysadmin tools installed
+  yum: name={{ item }} state=latest
+  with_items: "{{ ansible_centos_base__sysadmin_tools }}"
+
+

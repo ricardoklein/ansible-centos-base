@@ -1,0 +1,63 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+#
+# Variables
+#
+export HISTFILESIZE="6000"
+export HISTSIZE="6000"
+export EDITOR="vim"
+export VISUAL="vim"
+export HISTCONTROL="ignoredups"
+export HISTTIMEFORMAT='%F %T '
+
+#
+# Colors
+#
+red='\e[0;31m'
+RED='\e[1;31m'
+blue='\e[0;34m'
+BLUE='\e[1;34m'
+cyan='\e[0;36m'
+CYAN='\e[1;36m'
+NC='\e[0m'
+
+#
+# Alias
+#
+alias ll="ls -lah"
+alias vi="vim"
+alias limpatil="rm -rf *~"
+
+## Get current host related info.
+function ii()
+{
+	echo -e "\nYou are logged on ${CYAN}$HOSTNAME"
+	echo -e "\nAdditionnal information:$NC " ; uname -a
+	echo -e "${CYAN}BASH Version ${NC}${BASH_VERSION%.*}"
+	echo -e "\n${CYAN}Users logged on:$NC " ; w -h
+	echo -e "\n${CYAN}Current date :$NC " ; date
+	echo -e "\n${CYAN}Machine stats :$NC " ; uptime
+	echo -e "\n${CYAN}Memory stats :$NC " ; free
+	echo -e "\n${CYAN}Open connections :$NC "; netstat -pan --inet;
+	echo
+}
+
+
+# Prompt
+if [ `id -un` = root ]; then
+	PS1='\[\e[1;31m\][\u@\h \W]\$\[\e[0m\] '
+else
+	PS1='\[\e[1;36m\][\u@\h \W]\$\[\e[0m\] '
+fi
+
