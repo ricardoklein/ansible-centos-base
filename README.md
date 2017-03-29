@@ -6,7 +6,7 @@ Ansible role to configure some CentOS7 base system packages and rules.
 Requirements
 ------------
 
-You should edit files/ssh_keys and add your own keys, if you run this without this file, you probabli will have problems because this role configures ssh to only allow ssh key auth and no more password authentication.
+You **SHOULD EDIT files/ssh_keys** and add your own keys, if you run this without this file, you probabli will have problems because this role configures ssh to only allow ssh key auth and no more password authentication.
 @TODO: Change this to use host_vars and fail if there are at least one ssh public key configured.
 
 Role Variables
@@ -55,7 +55,7 @@ Role Variables
 Dependencies
 ------------
 
-This role has no dependencies, but remember to read the item #Requirements above.
+This role has no dependencies, but remember to read the item **#Requirements** above.
 
 Example Playbook
 ----------------
