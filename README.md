@@ -1,38 +1,75 @@
-Role Name
+kleinstuff.centos-base
 =========
 
-A brief description of the role goes here.
+Ansible role to configure some CentOS7 base system packages and rules.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+You should edit files/ssh_keys and add your own keys, if you run this without this file, you probabli will have problems because this role configures ssh to only allow ssh key auth and no more password authentication.
+@TODO: Change this to use host_vars and fail if there are at least one ssh public key configured.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### The machine hostname (to set its hostname)
+        ansible_centos_base__hostname: localhost
+
+### The user to be configured and used by ansible
+        ansible_centos_base__username: ansible
+
+### Default system timezone
+        ansible_centos_base__timezone: 'America/Sao_Paulo'
+
+### Sets the variable $EDITOR used by some things like "visudo" and "crontab -e"
+        ansible_centos_base__text_editor: vim
+
+### Basic set of tools to troubleshooting and use of the system
+        ansible_centos_base__sysadmin_tools:
+          - wget
+          - git
+          - rsync
+          - sudo
+          - telnet
+          - traceroute
+          - vim-enhanced
+          - which
+          - yum-plugin-keys
+          - bind-utils
+          - mlocate
+          - zip
+          - unzip
+          - xz
+          - curl
+          - sysstat
+          - fping
+          - setroubleshoot-server
+          - lsof
+          - source-highlight
+          - screen
+          - tmux
+          - htop
+          - iftop
+          - python-firewall
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has no dependencies, but remember to read the item #Requirements above.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: kleinstuff.centos-phpfpm }
 
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+You can ask me anything using github issues on my project repository
