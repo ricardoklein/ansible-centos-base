@@ -6,8 +6,8 @@ Ansible role to configure some CentOS7 base system packages and rules.
 Requirements
 ------------
 
-You **SHOULD EDIT files/ssh_keys** and add your own keys, if you run this without this file, you probabli will have problems because this role configures ssh to only allow ssh key auth and no more password authentication.
-@TODO: Change this to use host_vars and fail if there are at least one ssh public key configured.
+I suggest you to set the variable "ansible_centos_base__hostname" so you will have your hostname set up, but you can live with the default vaule "localhost".
+But it is required to you to set up "ansible_centos_base__authorized_keys" with at least one ssh key, multiline is allowed.
 
 Role Variables
 --------------
@@ -20,10 +20,12 @@ Role Variables
 
 ### Default system timezone
         ansible_centos_base__timezone: 'America/Sao_Paulo'
+
 ### At least 1 ssh public key (you can use multiline to add more than one key with | )
         ansible_centos_base__authorized_key: |
             "ssh-rsa...
              ssh-rsa..."
+
 ### Sets the variable $EDITOR used by some things like "visudo" and "crontab -e"
         ansible_centos_base__text_editor: vim
 
