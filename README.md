@@ -20,7 +20,10 @@ Role Variables
 
 ### Default system timezone
         ansible_centos_base__timezone: 'America/Sao_Paulo'
-
+### At least 1 ssh public key (you can use multiline to add more than one key with | )
+        ansible_centos_base__authorized_key: |
+            "ssh-rsa...
+             ssh-rsa..."
 ### Sets the variable $EDITOR used by some things like "visudo" and "crontab -e"
         ansible_centos_base__text_editor: vim
 
