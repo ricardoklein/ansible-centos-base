@@ -6,9 +6,14 @@
   yum: name=epel-release state=latest
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: BASE_OS | PACKAGES | Ensure basic sysadmin tools installed
+- name: BASE_OS | PACKAGES | Ensure basic packages installed
   yum: name={{ item }} state=latest
-  with_items: "{{ ansible_centos_base__sysadmin_tools }}"
+  with_items: "{{ ansible_centos_base__packages }}"
+
+- name: BASE_OS | PACKAGES | Install Extra packages if set
+  yum: name={{ item }} state=latest
+  with_items: "{{ ansible_centos_base__packages_extra }}"
+  when: ansible_centos_base__packages_extra
 
 - name: BASE_OS | PACKAGES | yum - upgrade any out of date packages
   yum:
