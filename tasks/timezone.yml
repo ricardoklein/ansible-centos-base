@@ -1,3 +1,0 @@
-- name: Set timezone to {{ ansible_centos_base__timezone }}
-  timezone:
-    name: '{{ ansible_centos_base__timezone }}'

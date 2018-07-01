@@ -1,0 +1,27 @@
+# Password setting used here is similar to running 'passwd -l root' which just
+# prefixes the hashed password in /etc/shadow with an '!', making it an invalid hash
+# The supplied password is expected to already be hashed and the supplied value is
+# put directly into /etc/shadow so the result is an /etc/shadow that looks like:
+# ...
+# root:!:...
+# ...
+# This both clears and disables any existing password for the root account.
+- name: HARDENING | USERS | Disable root login
+  user:
+    name: root
+    shell: /usr/sbin/nologin
+    password: '!'
+
+# As recommended by LinEnum.
+- name: HARDENING | USERS | Only root can read root's .bash_history
+  file:
+    path: /root/.bash_history
+    mode: 0600
+    state: touch
+  changed_when: false
+
+- name: HARDENING | USERS | Disable root tty access
+  copy:
+    content: ""
+    dest: /etc/securetty
+

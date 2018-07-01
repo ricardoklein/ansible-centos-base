@@ -1,0 +1,34 @@
+---
+- name: BASE_OS | PACKAGES | Ensure deltarpm installed (before updating CentOS packages)
+  yum: name=deltarpm state=latest
+
+- name: BASE_OS | PACKAGES | Ensure EPEL installed
+  yum: name=epel-release state=latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: BASE_OS | PACKAGES | Ensure basic sysadmin tools installed
+  yum: name={{ item }} state=latest
+  with_items: "{{ ansible_centos_base__sysadmin_tools }}"
+
+- name: BASE_OS | PACKAGES | yum - upgrade any out of date packages
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+
+- name: BASE_OS | PACKAGES | Configure yum-cron
+  lineinfile:
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    dest: /etc/yum/yum-cron.conf
+    state: present
+  with_items:
+    - {regexp: '^update_cmd\s*=\s*', line: "update_cmd = security"}
+    - {regexp: '^apply_updates\s*=\s*', line: "apply_updates = yes"}
+  when: ansible_os_family == "RedHat"
+
+- name: BASE_OS | PACKAGES | Install pexpect via pip
+  pip:
+    name: "pexpect"
+    version: "3.3"
+

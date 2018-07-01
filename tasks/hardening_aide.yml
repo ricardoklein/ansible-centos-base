@@ -1,0 +1,25 @@
+---
+- name: HARDENING | AIDE | Check for DB
+  stat:
+    path: "{{ path_aide_db }}"
+  register: aide_db_check
+
+- name: HARDENING | AIDE | Initialize AIDE DB
+  shell: aide --init
+  changed_when: false
+  when: ansible_os_family == "RedHat" and aide_db_check.stat.exists == false
+  tags:
+    - skip_ansible_lint
+
+- name: HARDENING | AIDE | Copy initialized DB
+  copy:
+    remote_src: true
+    src: /var/lib/aide/aide.db.new.gz
+    dest: "{{ path_aide_db }}"
+  when: ansible_os_family == "RedHat" and aide_db_check.stat.exists == false
+
+- name: HARDENING | AIDE | Delete old DB
+  file:
+    path: /var/lib/aide/aide.db.new.gz
+    state: absent
+  when: ansible_os_family == "RedHat" and aide_db_check.stat.exists == false

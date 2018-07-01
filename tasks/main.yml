@@ -1,7 +1,18 @@
 ---
-- include: packages.yml
-- include: timezone.yml
-- include: ssh.yml
-- include: logintimeout.yml
-- include: bash_profile.yml
-- include: sethostname.yml
+- include: baseos_user.yml
+- include: baseos_bash_profile.yml
+- include: baseos_logintimeout.yml
+- include: baseos_packages.yml
+- include: baseos_timezone.yml
+- include: baseos_vim.yml
+- include: hardening_aide.yml
+- include: hardening_auditd.yml
+- include: hardening_kernel.yml
+- include: hardening_misc.yml
+- include: hardening_password.yml
+- include: hardening_services.yml
+- include: hardening_sshd.yml
+- include: hardening_sysctl.yml
+- include: hardening_umask.yml
+- include: hardening_users.yml
+

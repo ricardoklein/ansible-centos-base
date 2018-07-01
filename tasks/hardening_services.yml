@@ -1,0 +1,21 @@
+---
+# Do not allow normal users to use cron
+- name: HARDENING | SERVICES | cron.allow
+  copy:
+    content: "root"
+    dest: "/etc/cron.allow"
+    owner: root
+    group: root
+    mode: 0644
+
+# Remove Mail Services
+- name: HARDENING | SERVICES | Disable mail services
+  service:
+    name: "{{ item }}"
+    enabled: false
+  register: unused_disable
+  #If the service doesn't exist, no need to disable -> not a failure
+  failed_when: "unused_disable|failed and ('find' not in unused_disable.msg and 'found' not in unused_disable.msg)"
+  with_items:
+    - exim4
+    - postfix
