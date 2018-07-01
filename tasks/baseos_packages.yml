@@ -13,7 +13,7 @@
 - name: BASE_OS | PACKAGES | Install Extra packages if set
   yum: name={{ item }} state=latest
   with_items: "{{ ansible_centos_base__packages_extra }}"
-  when: ansible_centos_base__packages_extra
+  when: ansible_centos_base__packages_extra is defined
 
 - name: BASE_OS | PACKAGES | yum - upgrade any out of date packages
   yum:

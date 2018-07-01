@@ -1,29 +1,17 @@
 ---
-ansible_centos_base__username: ansible
+ansible_centos_base__username: centos
 ansible_centos_base__timezone: 'America/Sao_Paulo'
 ansible_centos_base__text_editor: vim
 
 ansible_centos_base__packages:
   - git
-  - rsync
   - sudo
-  - traceroute
   - vim-enhanced
   - which
   - yum-plugin-keys
-  - bind-utils
   - mlocate
-  - zip
-  - unzip
-  - xz
-  - curl
-  - sysstat
   - setroubleshoot-server
-  - lsof
-  - htop
-  - iftop
   - python-firewall
-  - sudo
   - python-pip
   - python-virtualenv
   - gnupg
@@ -31,6 +19,7 @@ ansible_centos_base__packages:
   - openssl
   - rsyslog
   - logrotate
+  - yum-cron
 
 path_bin_aide: /usr/sbin/aide
 path_pam_system_auth: /etc/pam.d/system-auth
