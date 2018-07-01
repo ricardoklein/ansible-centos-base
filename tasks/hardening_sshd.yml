@@ -13,11 +13,10 @@
     - { reg: '^(#)?Compression', line: 'Compression no'}
     - { reg: '^(#)?LogLevel', line: 'LogLevel VERBOSE'}
     - { reg: '^(#)?MaxAuthTries', line: 'MaxAuthTries 1'}
-    - { reg: '^(#)?MaxSessions', line: 'MaxSessions 2'}
+    - { reg: '^(#)?MaxSessions', line: 'MaxSessions 3'}
     - { reg: '^(#)?TCPKeepAlive', line: 'TCPKeepAlive no'}
     - { reg: '^(#)?UsePrivilegeSeparation', line: 'UsePrivilegeSeparation SANDBOX'}
     - { reg: '^(#)?X11Forwarding', line: 'X11Forwarding no'}
-    - { reg: '^(#)?AllowUsers', line: 'AllowUsers {{ allowed_ssh_users }}'}
     # V-38607 - The SSH daemon must be configured to use only the SSHv2 protocol
     - { reg: '^(#)?PrintLastLog', line: 'PrintLastLog yes'}
     # V-38607 - The SSH daemon must be configured to use only the SSHv2 protocol

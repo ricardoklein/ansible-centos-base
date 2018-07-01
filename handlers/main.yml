@@ -1,3 +1,9 @@
 ---
  - name: restart_ssh
    service: name=sshd state=restarted
+
+ - name: start auditd
+   systemd:
+    name: auditd
+    state: started
+   when: ansible_virtualization_type != "docker"

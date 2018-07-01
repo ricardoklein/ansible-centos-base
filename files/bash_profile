@@ -37,7 +37,6 @@ NC='\e[0m'
 #
 alias ll="ls -lah"
 alias vi="vim"
-alias limpatil="rm -rf *~"
 
 ## Get current host related info.
 function ii()

@@ -3,9 +3,7 @@
 - include: baseos_bash_profile.yml
 - include: baseos_packages.yml
 - include: baseos_timezone.yml
-- include: baseos_vim.yml
 - include: hardening_logintimeout.yml
-- include: hardening_aide.yml
 - include: hardening_auditd.yml
 - include: hardening_kernel.yml
 - include: hardening_misc.yml
@@ -15,4 +13,5 @@
 - include: hardening_sysctl.yml
 - include: hardening_umask.yml
 - include: hardening_users.yml
+- include: hardening_aide.yml
 
