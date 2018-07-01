@@ -6,17 +6,14 @@ Ansible role to configure some CentOS7 base system packages and rules.
 Requirements
 ------------
 
-I suggest you to set the variable "ansible_centos_base__hostname" so you will have your hostname set up, but you can live with the default vaule "localhost".
-But it is required to you to set up "ansible_centos_base__authorized_keys" with at least one ssh key, multiline is allowed.
+It is required to set up "ansible_centos_base__authorized_keys" with at least one ssh key, multiline is allowed.
+I want to change this and allow you to use a "install user" for setup and then add all your admin users.
 
 Role Variables
 --------------
 
-### The machine hostname (to set its hostname)
-        ansible_centos_base__hostname: localhost
-
 ### The user to be configured and used by ansible
-        ansible_centos_base__username: ansible
+        ansible_centos_base__username: centos
 
 ### Default system timezone
         ansible_centos_base__timezone: 'America/Sao_Paulo'
@@ -30,12 +27,10 @@ Role Variables
         ansible_centos_base__text_editor: vim
 
 ### Basic set of tools to troubleshooting and use of the system
-        ansible_centos_base__sysadmin_tools:
-          - wget
+       ansible_centos_base__packages:
           - git
           - rsync
           - sudo
-          - telnet
           - traceroute
           - vim-enhanced
           - which
@@ -47,15 +42,19 @@ Role Variables
           - xz
           - curl
           - sysstat
-          - fping
           - setroubleshoot-server
           - lsof
-          - source-highlight
-          - screen
-          - tmux
           - htop
           - iftop
           - python-firewall
+          - sudo
+          - python-pip
+          - python-virtualenv
+          - gnupg
+          - aide
+          - openssl
+          - rsyslog
+          - logrotate 
 
 Dependencies
 ------------
@@ -67,7 +66,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: kleinstuff.centos-phpfpm }
+         - { role: kleinstuff.centos-centos-base }
 
 License
 -------
