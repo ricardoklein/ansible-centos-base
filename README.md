@@ -2,6 +2,7 @@ kleinstuff.centos-base
 =========
 
 Ansible role to configure some CentOS7 base system packages and rules.
+This role was based on the awesome job by https://github.com/bau-sec/ansible-openvpn-hardened 
 
 Requirements
 ------------
