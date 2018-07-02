@@ -9,5 +9,3 @@
     user={{ ansible_centos_base__username }}
     key={{ ansible_centos_base__authorized_keys }}
     exclusive=True
-
-
