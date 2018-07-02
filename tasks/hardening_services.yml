@@ -13,9 +13,15 @@
   service:
     name: "{{ item }}"
     enabled: false
-  register: unused_disable
-  #If the service doesn't exist, no need to disable -> not a failure
-  failed_when: "unused_disable|failed and ('find' not in unused_disable.msg and 'found' not in unused_disable.msg)"
+  register: systemd_output
+  failed_when: "systemd_output.failed == 1 and ('Could not find the requested service' not in systemd_output.msg)"
   with_items:
     - exim4
     - postfix
+  tags:
+    - test
+
+- name: Debug foo
+  debug:
+    var: systemd_output
+
