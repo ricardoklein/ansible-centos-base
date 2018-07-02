@@ -68,6 +68,12 @@ Example Playbook
       roles:
          - { role: kleinstuff.centos-centos-base }
 
+#ToDo
+-----
+ - Configure automatic tests using TravisCI
+ - Allow creating more users
+ - Allow optional firewalld configuration
+
 License
 -------
 
