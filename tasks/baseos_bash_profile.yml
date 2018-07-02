@@ -8,5 +8,3 @@
   with_items:
     - /root/.bash_profile
     - "/home/{{ ansible_centos_base__username }}/.bash_profile"
-
-

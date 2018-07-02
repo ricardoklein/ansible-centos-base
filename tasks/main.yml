@@ -14,4 +14,3 @@
 - include: hardening_umask.yml
 - include: hardening_users.yml
 - include: hardening_aide.yml
-

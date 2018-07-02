@@ -42,5 +42,3 @@
     - { reg: '^(#)?UseDNS', line: 'UseDNS no'}
     - { reg: '^(#)?AllowAgentForwarding', line: 'AllowAgentForwarding no'}
   notify: restart_ssh
-
-

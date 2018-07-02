@@ -24,4 +24,3 @@
   copy:
     content: ""
     dest: /etc/securetty
-
