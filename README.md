@@ -24,38 +24,28 @@ Role Variables
             "ssh-rsa...
              ssh-rsa..."
 
-### Sets the variable $EDITOR used by some things like "visudo" and "crontab -e"
-        ansible_centos_base__text_editor: vim
-
-### Basic set of tools to troubleshooting and use of the system
+### Basic set of system packages 
        ansible_centos_base__packages:
           - git
-          - rsync
           - sudo
-          - traceroute
           - vim-enhanced
           - which
           - yum-plugin-keys
-          - bind-utils
           - mlocate
-          - zip
-          - unzip
-          - xz
-          - curl
-          - sysstat
           - setroubleshoot-server
-          - lsof
-          - htop
-          - iftop
           - python-firewall
-          - sudo
           - python-pip
           - python-virtualenv
           - gnupg
           - aide
           - openssl
           - rsyslog
-          - logrotate 
+          - logrotate
+          - yum-cron
+
+### Install extra packages (usefull to use in group_vars, host_vars), but empty by default.
+        ansible_centos_base__packages_extra
+
 
 Dependencies
 ------------
