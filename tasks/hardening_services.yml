@@ -18,10 +18,4 @@
   with_items:
     - exim4
     - postfix
-  tags:
-    - test
-
-- name: Debug foo
-  debug:
-    var: systemd_output
 
