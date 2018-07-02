@@ -1,0 +1,21 @@
+---
+# Do not allow normal users to use cron
+- name: HARDENING | SERVICES | cron.allow
+  copy:
+    content: "root"
+    dest: "/etc/cron.allow"
+    owner: root
+    group: root
+    mode: 0644
+
+# Remove Mail Services
+- name: HARDENING | SERVICES | Disable mail services
+  service:
+    name: "{{ item }}"
+    enabled: false
+  register: systemd_output
+  failed_when: "systemd_output.failed == 1 and ('Could not find the requested service' not in systemd_output.msg)"
+  with_items:
+    - exim4
+    - postfix
+

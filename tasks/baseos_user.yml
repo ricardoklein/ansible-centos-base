@@ -1,0 +1,13 @@
+---
+- name: BASE_OS | ADMIN USER | Check authorized_keys before run
+  fail:
+    msg: "You need at least one authorized_key set on ansible_centos_base__authorized_keys "
+  when: ansible_centos_base__authorized_keys is not defined
+
+- name: BASE_OS | ADMIN USER | Set up authorized_keys
+  authorized_key: >
+    user={{ ansible_centos_base__username }}
+    key={{ ansible_centos_base__authorized_keys }}
+    exclusive=True
+
+
