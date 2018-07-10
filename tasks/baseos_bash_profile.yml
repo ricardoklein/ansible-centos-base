@@ -1,10 +1,12 @@
-- name: BASE_OS | BASHPROFILE | Copy os-security.yml to apply security settings
+- name: BASE_OS | BASHPROFILE | Copy default .bash_profile
   copy:
     src=bash_profile
-    dest="{{ item }}"
+    dest="{{ item.home | default(['/home/',item.name] | join ) }}/.bash_profile"
     owner=root
     group=root
     mode=0644
   with_items:
-    - /root/.bash_profile
-    - "/home/{{ ansible_centos_base__username }}/.bash_profile"
+    - "{{ ansible_centos_base__users }}"
+  tags:
+    - baseos
+    - users

@@ -1,0 +1,87 @@
+{{ ansible_centos_base__ansiblemanaged }}
+
+{% for item in ansible_centos_base__sshports %}
+Port {{ item }}
+{% endfor %}
+
+# The default requires explicit activation of protocol 1
+Protocol 2
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Logging
+SyslogFacility AUTHPRIV
+LogLevel VERBOSE
+
+# Authentication:
+PermitRootLogin no
+MaxAuthTries 2
+MaxSessions 3
+
+# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
+# but this is overridden so installations will only check .ssh/authorized_keys
+AuthorizedKeysFile	.ssh/authorized_keys
+
+# HostBasedAuth 
+HostbasedAuthentication no
+IgnoreRhosts yes
+
+# To disable tunneled clear text passwords, change to no here!
+PermitEmptyPasswords no
+PasswordAuthentication no
+
+# Change to no to disable s/key passwords
+ChallengeResponseAuthentication no
+
+# GSSAPI options
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials no
+UsePAM yes
+
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+PrintLastLog yes
+TCPKeepAlive no
+UsePrivilegeSeparation SANDBOX
+PermitUserEnvironment no
+Compression no
+ClientAliveInterval 300
+ClientAliveCountMax 0
+UseDNS no
+
+# no default banner path
+Banner /etc/issue
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+# override default of no subsystems
+Subsystem       sftp    internal-sftp
+
+Ciphers aes256-ctr,aes256-cbc
+
+
+{% for user in ansible_centos_base__users %}
+{% if user.jail and user.jail == "yes" %}
+Match User {{ user.name }}
+   	ChrootDirectory %h
+	ForceCommand internal-sftp
+    {% if user.AllowPass == "yes" %}
+	PasswordAuthentication yes
+    {% endif %}
+	AllowTCPForwarding no
+{% endif %}
+{% if user.AllowTunnel == "yes" %}
+Match User {{ user.name }}
+    {% if user.AllowPass == "yes" %}
+	PasswordAuthentication yes
+    {% endif %}
+	AllowTCPForwarding yes
+{% endif %}
+{% endfor %}

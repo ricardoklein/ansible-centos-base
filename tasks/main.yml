@@ -1,16 +1,68 @@
 ---
 - include: baseos_user.yml
+  tags:
+    - baseos
+    - users
+
 - include: baseos_bash_profile.yml
+  tags:
+    - baseos
+    - users
+
 - include: baseos_packages.yml
+  tags:
+    - packages
+
 - include: baseos_timezone.yml
+  tags:
+    - baseos
+    - timezone
+
 - include: hardening_logintimeout.yml
+  tags:
+    - hardening
+    - logintimeout
+
 - include: hardening_auditd.yml
+  tags:
+    - hardening
+
 - include: hardening_kernel.yml
+  tags:
+    - hardening
+
 - include: hardening_misc.yml
+  tags:
+    - hardening
+
 - include: hardening_password.yml
+  tags:
+    - hardening
+
 - include: hardening_services.yml
+  tags:
+    - hardening
+
 - include: hardening_sshd.yml
+  tags:
+    - users
+    - hardening
+    - baseos
+
 - include: hardening_sysctl.yml
+  tags:
+    - hardening
+
 - include: hardening_umask.yml
+  tags:
+    - hardening
+
 - include: hardening_users.yml
+  tags:
+    - hardening
+    - users
+    - baseos
+
 - include: hardening_aide.yml
+  tags:
+    - always

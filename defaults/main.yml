@@ -1,4 +1,5 @@
 ---
+ansible_centos_base__ansiblemanaged: "#Managed By Ansible\n#Do not edit by hand"
 ansible_centos_base__username: centos
 ansible_centos_base__timezone: 'America/Sao_Paulo'
 ansible_centos_base__text_editor: vim
@@ -33,3 +34,7 @@ deny_failed_login_auth_files:
   - "{{ path_pam_system_auth }}"
   - '/etc/pam.d/password-auth'
 deny_failed_login_account_files: "{{ deny_failed_login_auth_files }}"
+
+ansible_centos_base__sshjaildir: /home/jail
+ansible_centos_base__sshports:
+  - 22

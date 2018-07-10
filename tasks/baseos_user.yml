@@ -1,11 +1,44 @@
 ---
-- name: BASE_OS | ADMIN USER | Check authorized_keys before run
-  fail:
-    msg: "You need at least one authorized_key set on ansible_centos_base__authorized_keys "
-  when: ansible_centos_base__authorized_keys is not defined
+#- name: BASE_OS | ADMIN USER | Check authorized_keys before run
+#  fail:
+  #    msg: "You need at least one authorized_key set on ansible_centos_base__authorized_keys "
+  #  when: ansible_centos_base__authorized_keys is not defined
 
-- name: BASE_OS | ADMIN USER | Set up authorized_keys
-  authorized_key: >
-    user={{ ansible_centos_base__username }}
-    key={{ ansible_centos_base__authorized_keys }}
-    exclusive=True
+# For users with sftp jail, we need to change permissions of the home folder.
+# You will always need to put user home dirs inside sshjaildir for this to work
+# For password creation, use python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+- name: BASE OS | USERS | Create jail basepath permissions
+  file:
+    path: "{{ ansible_centos_base__sshjaildir }}"
+    mode: 0700
+    owner: root
+    group: root
+    state: directory
+  tags:
+    - test
+
+- name: BASE OS | USERS | Creating users
+  user:
+    name: "{{ item.name }}"
+    update_password: "{{ item.update_password | default('on_create') }}"
+    state: "{{ item.state }}"
+    password: "{{ item.password }}"
+    groups: "{{ item.groups }}"
+    home: "{{ item.home | default(['/home/',item.name] | join ) }}"
+  with_items:
+    - "{{ ansible_centos_base__users }}"
+  tags:
+    - test
+
+- name: BASE OS | USERS | Set up authorized_keys
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.authorized_key }}"
+    #key: "{{ lookup('file', item.authorized_key) }}"
+    exclusive: True
+  with_items:
+    - "{{ ansible_centos_base__users }}"
+  tags:
+    - test
+
+
