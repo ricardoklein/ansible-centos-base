@@ -63,6 +63,11 @@
     - users
     - baseos
 
+- include: hardening_fix_rpm_perms.yml
+  tags:
+    - always
+    - test
+
 - include: hardening_aide.yml
   tags:
     - always

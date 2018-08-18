@@ -20,6 +20,7 @@ ansible_centos_base__packages:
   - rsyslog
   - logrotate
   - yum-cron
+  - openscap-scanner
 path_bin_aide: /usr/sbin/aide
 path_pam_system_auth: /etc/pam.d/system-auth
 path_pam_password_auth: /etc/pam.d/system-auth
