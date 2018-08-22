@@ -43,10 +43,11 @@
 
 - name: HARDENING | AUDITD | Monitor all setuid/setgid applications
   lineinfile:
-    dest: /etc/audit/rules.d/audit.rules
+    dest: /etc/audit/rules.d/setuidgidapps.rules
     line: "-a always,exit -F path={{ item }} -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged"
     regexp: '^\-a\s+always,exit\s+\-F\s+path={{ item }}\s+\-F\s+perm=x\s+\-F\s+auid>=1000\s+\-F\s+auid!=4294967295\s+\-k\s+privileged\s*$'
     state: present
+    create: yes
   with_items: "{{ found_setuid_bins.stdout_lines }}"
   notify:
     - start auditd

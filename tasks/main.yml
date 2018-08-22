@@ -23,10 +23,6 @@
     - hardening
     - logintimeout
 
-- include: hardening_auditd.yml
-  tags:
-    - hardening
-
 - include: hardening_kernel.yml
   tags:
     - hardening
@@ -63,10 +59,13 @@
     - users
     - baseos
 
+- include: hardening_auditd.yml
+  tags:
+    - hardening
+
 - include: hardening_fix_rpm_perms.yml
   tags:
     - always
-    - test
 
 - include: hardening_aide.yml
   tags:

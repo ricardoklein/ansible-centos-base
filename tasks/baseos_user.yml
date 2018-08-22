@@ -14,8 +14,6 @@
     owner: root
     group: root
     state: directory
-  tags:
-    - test
 
 - name: BASE OS | USERS | Creating users
   user:
@@ -27,8 +25,6 @@
     home: "{{ item.home | default(['/home/',item.name] | join ) }}"
   with_items:
     - "{{ ansible_centos_base__users }}"
-  tags:
-    - test
 
 - name: BASE OS | USERS | Set up authorized_keys
   authorized_key:
@@ -38,7 +34,4 @@
     exclusive: True
   with_items:
     - "{{ ansible_centos_base__users }}"
-  tags:
-    - test
-
 
