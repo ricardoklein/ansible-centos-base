@@ -23,7 +23,7 @@
     - DISA-STIG-RHEL-07-010010
 
 - name: "HARDENING | RPM FILE PERMISSIONS | Fix file permissions with RPM"
-  command: "rpm --quiet --setperms $(sudo rpm -qf --qf '%{NAME}' '{{item}}')"
+  shell: "rpm --quiet --setperms $(sudo rpm -qf --qf '%{NAME}' '{{item}}')"
   args:
     warn: no
   with_items: "{{ files_with_incorrect_permissions.stdout_lines }}"
