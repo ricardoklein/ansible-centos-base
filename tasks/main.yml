@@ -18,11 +18,6 @@
     - baseos
     - timezone
 
-- include: hardening_logintimeout.yml
-  tags:
-    - hardening
-    - logintimeout
-
 - include: hardening_kernel.yml
   tags:
     - hardening

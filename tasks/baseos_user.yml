@@ -1,12 +1,8 @@
 ---
-#- name: BASE_OS | ADMIN USER | Check authorized_keys before run
-#  fail:
-  #    msg: "You need at least one authorized_key set on ansible_centos_base__authorized_keys "
-  #  when: ansible_centos_base__authorized_keys is not defined
+# For users with sftp jail, we need to change permissions of the home folder 
+# and create some dir so he will be able to save files.
+# To set a hased password use: $# openssl passwd -salt SOMESALT -1 SOMEPASS
 
-# For users with sftp jail, we need to change permissions of the home folder.
-# You will always need to put user home dirs inside sshjaildir for this to work
-# For password creation, use python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
 - name: BASE OS | USERS | Create jail basepath permissions
   file:
     path: "{{ ansible_centos_base__sshjaildir }}"
@@ -42,7 +38,6 @@
   authorized_key:
     user: "{{ item.name }}"
     key: "{{ item.authorized_key }}"
-    #key: "{{ lookup('file', item.authorized_key) }}"
     exclusive: True
   with_items:
     - "{{ ansible_centos_base__users }}"
