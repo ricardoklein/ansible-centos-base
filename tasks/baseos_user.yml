@@ -18,13 +18,25 @@
 - name: BASE OS | USERS | Creating users
   user:
     name: "{{ item.name }}"
-    update_password: "{{ item.update_password | default('on_create') }}"
+    #update_password: "{{ item.update_password | default('on_create') }}"
     state: "{{ item.state }}"
     password: "{{ item.password }}"
     groups: "{{ item.groups }}"
     home: "{{ item.home | default(['/home/',item.name] | join ) }}"
   with_items:
     - "{{ ansible_centos_base__users }}"
+
+- name: BASE OS | USERS | Reset permission for jail users
+  file:
+    path: "{{ item.home }}"
+    mode: 0755
+    owner: root
+    group: root
+    state: directory
+  with_items:
+    - "{{ ansible_centos_base__users }}"
+  when: 
+    - item.jail == "yes"
 
 - name: BASE OS | USERS | Set up authorized_keys
   authorized_key:

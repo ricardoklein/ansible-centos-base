@@ -2,8 +2,8 @@
   copy:
     src=bash_profile
     dest="{{ item.home | default(['/home/',item.name] | join ) }}/.bash_profile"
-    owner=root
-    group=root
+    owner="{{ item.name }}"
+    group="{{ item.name }}"
     mode=0644
   with_items:
     - "{{ ansible_centos_base__users }}"
