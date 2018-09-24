@@ -29,7 +29,6 @@
   copy:
     src: files/profile.d--login-timeout.sh
     dest: /etc/profile.d/login-timeout.sh
-    state: present
     owner: root
     group: root
     mode: 0755

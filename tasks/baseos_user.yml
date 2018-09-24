@@ -6,7 +6,7 @@
 - name: BASE OS | USERS | Create jail basepath permissions
   file:
     path: "{{ ansible_centos_base__sshjaildir }}"
-    mode: 0700
+    mode: 0755
     owner: root
     group: root
     state: directory
